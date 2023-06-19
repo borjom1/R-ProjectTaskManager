@@ -15,3 +15,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.MuiButton-outlined {
+  text-transform: capitalize !important;
+}
+
+.MuiButton-filled {
+  text-transform: capitalize !important;
+}
