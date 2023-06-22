@@ -13,7 +13,7 @@ import ModalUserInfo from "./ModalUserInfo";
 import {getUser, removeUser} from "../utils/localstorage";
 import {getUserInfo} from "../services/user";
 
-const UserProfile = () => {
+const UserProfile = ({setUserRoles}) => {
 
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -30,6 +30,7 @@ const UserProfile = () => {
       const {avatar, ...any} = data;
       setUser({...any, login: '@' + login});
       setUserAvatar(avatar);
+      setUserRoles(data.roles);
     });
   }, []);
 
@@ -68,7 +69,7 @@ const UserProfile = () => {
             <p className='text-white-f0 text-lg leading-none'>{user?.fullName}</p>
             {role}
           </div>
-          <p className='mt-0.5 text-gray-7d text-xs font-medium leading-none'>{user?.login}</p>
+          <p className='mt-1 text-gray-7d text-xs font-medium leading-none'>{user?.login}</p>
         </div>
       </div>
       <div className='px-10 mx-auto mt-6'>
