@@ -1,10 +1,10 @@
 import React from 'react';
 import {TextField} from '@mui/material';
 
-const TextInput = ({label, onChange, isPassword, error}) => {
+const TextInput = ({label, onChange, isPassword, error, bgColor, defaultValue}) => {
 
   const textFieldStyles = {
-    backgroundColor: '#424242',
+    backgroundColor: bgColor || '#424242',
     input: {
       color: '#F0F0F0',
       borderRadius: 30
@@ -25,6 +25,7 @@ const TextInput = ({label, onChange, isPassword, error}) => {
       type={type}
       sx={textFieldStyles}
       onChange={onChange}
+      defaultValue={defaultValue || ''}
       error={!!error} helperText={error}
     />
   );
