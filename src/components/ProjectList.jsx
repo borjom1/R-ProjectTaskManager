@@ -1,19 +1,21 @@
 import React from 'react';
 import ProjectItem from "./ProjectItem";
 import {AiFillAlert } from 'react-icons/ai';
+import {Link} from "react-router-dom";
 
 const ProjectList = ({className, projects}) => {
 
   const list = projects?.map(p =>
-    <ProjectItem
-      key={p.id}
-      id={p.id}
-      title={p.name}
-      desc={p.description}
-      people={p.members}
-      tasksDone={p.tasksCompleted + ''}
-      tasksUnDone={p.tasksInProcess + ''}
-    />
+    <Link to={`/project/${p.id}`} key={p.id}>
+      <ProjectItem
+        id={p.id}
+        title={p.name}
+        desc={p.description}
+        people={p.members}
+        tasksDone={p.tasksCompleted + ''}
+        tasksUnDone={p.tasksInProcess + ''}
+      />
+    </Link>
   );
 
   return (
