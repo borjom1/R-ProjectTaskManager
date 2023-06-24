@@ -7,7 +7,7 @@ import NewProject from '../components/NewProject';
 import CreateNewFolderRoundedIcon from '@mui/icons-material/CreateNewFolderRounded';
 import UndoIcon from '@mui/icons-material/Undo';
 import {Button} from "@mui/material";
-import {getUser, saveUser} from "../utils/localstorage";
+import {getUser, removeUser, saveUser} from "../utils/localstorage";
 import {getProjects} from "../services/api/projectsApi";
 import {refresh} from '../services/api/authApi';
 
@@ -19,6 +19,8 @@ export default function Index() {
   const [isCreateOpened, setCreateOpened] = useState(false);
 
   useEffect(() => {
+    console.log('INDEX useEffect()');
+
     const user = getUser();
     if (!user) {
       navigate('/sign_in');
@@ -27,6 +29,13 @@ export default function Index() {
     getProjects(user.access).then(res => {
       if (res.status && res.status === 401) {
         refresh(user.refresh).then(data => {
+
+          if (data.status && data.status === 400) {
+            removeUser();
+            navigate('/sign_in');
+            return;
+          }
+
           saveUser(data);
           getProjects(data.access).then(data => setProjects(data));
         });
@@ -39,7 +48,7 @@ export default function Index() {
 
   return (
     <PageTemplate
-      upperRight={<UserProfile setUserRoles={setUserRoles}/>}>
+      upperRight={!projects.length ? null : <UserProfile setUserRoles={setUserRoles}/>}>
       <div className='w-full h-full bg-dark-24 rounded-[30px]'>
         <div className='h-[10%] w-full bg-dark-31 rounded-t-[30px] flex items-center justify-between py-4 px-12'>
           <p className='text-white-d6 text-2xl font-medium'>Projects you are involved in...</p>
