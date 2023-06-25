@@ -64,3 +64,12 @@ export const getTasks = async (projectId, storyId, accessToken) => {
     return response;
   }
 };
+
+export const createStory = async (projectId, body, accessToken) => {
+  try {
+    const response = await axios.post(`${API_URL}/${projectId}/story`, body, authHeader(accessToken));
+    return response.data;
+  } catch ({response}) {
+    return response;
+  }
+};
