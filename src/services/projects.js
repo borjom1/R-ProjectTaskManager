@@ -1,6 +1,7 @@
 import {getStories} from "./api/projectsApi";
 import {refresh} from "./api/authApi";
 import {getUser, saveUser} from "../utils/localstorage";
+import {getUserAvatar} from "./api/userApi";
 
 export const pullAllStories = async (projectId) => {
   const user = getUser();
@@ -19,4 +20,16 @@ export const pullAllStories = async (projectId) => {
   } else {
     return response;
   }
+};
+
+export const pullAvatars = async members => {
+  const storage = [];
+  for (const member of members) {
+    const res = await getUserAvatar(member.id, getUser().access);
+    storage.push({
+      id: member.id,
+      avatar: res.data.binary
+    });
+  }
+  return storage;
 };
