@@ -43,7 +43,9 @@ const Project = () => {
     <PageTemplate upperRight={<Panel name={project?.name}/>}>
       {isStoriesOpened ?
         <Stories
+          projectId={id}
           stories={stories}
+          setStories={setStories}
           setStoriesOpened={setStoriesOpened}
           setSelectedStory={setSelectedStory}
         />
