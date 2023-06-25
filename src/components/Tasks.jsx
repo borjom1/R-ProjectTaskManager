@@ -95,7 +95,9 @@ const Tasks = ({projectId, setStoriesOpened, selectedStory, userAvatars}) => {
         /> :
         <TaskList
           className='h-[83%] px-12 mt-4 flex flex-col gap-4 overflow-y-auto'
+          selectedStory={selectedStory}
           tasks={tasks}
+          setTasks={setTasks}
           userAvatars={userAvatars}
         />
       }
