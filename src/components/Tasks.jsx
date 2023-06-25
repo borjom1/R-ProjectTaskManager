@@ -11,11 +11,13 @@ import {getUser, saveUser} from "../utils/localstorage";
 import {refresh} from "../services/api/authApi";
 import NewTask from "./NewTask";
 
-const Tasks = ({projectId, setStoriesOpened, selectedStory, userAvatars}) => {
+const Tasks = ({roles, projectId, setStoriesOpened, selectedStory, userAvatars}) => {
 
   const navigate = useNavigate();
   const [isCreateOpened, setCreateOpened] = useState(false);
   const [tasks, setTasks] = useState([]);
+
+  const isManager = roles?.includes('MANAGER');
 
   useEffect(() => {
     console.log('TASKS useEffect()');
@@ -61,7 +63,7 @@ const Tasks = ({projectId, setStoriesOpened, selectedStory, userAvatars}) => {
         </div>
         {!isCreateOpened &&
           <div className='flex gap-2'>
-            {selectedStory?.id &&
+            {selectedStory?.id && isManager &&
               <Button
                 onClick={() => setCreateOpened(true)}
                 variant="outlined"
