@@ -3,8 +3,9 @@ import {Button, IconButton} from "@mui/material";
 import UndoIcon from "@mui/icons-material/Undo";
 import QueueIcon from '@mui/icons-material/Queue';
 import StoryList from "./StoryList";
+import NewStory from "./NewStory";
 
-const Stories = ({stories, setStoriesOpened, setSelectedStory}) => {
+const Stories = ({projectId, stories, setStories, setStoriesOpened, setSelectedStory}) => {
 
   const [isCreateOpened, setCreateOpened] = useState(false);
 
@@ -34,7 +35,12 @@ const Stories = ({stories, setStoriesOpened, setSelectedStory}) => {
       </div>
 
       {isCreateOpened ?
-        null :
+        <NewStory
+          projectId={projectId}
+          stories={stories}
+          setStories={setStories}
+          setCreateOpened={setCreateOpened}
+        /> :
         <StoryList
           className={'h-[82%] mt-6 overflow-y-auto px-12 flex flex-col gap-3'}
           stories={stories}
