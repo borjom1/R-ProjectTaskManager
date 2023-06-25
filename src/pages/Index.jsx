@@ -24,6 +24,7 @@ export default function Index() {
     const user = getUser();
     if (!user) {
       navigate('/sign_in');
+      return;
     }
 
     getProjects(user.access).then(res => {
