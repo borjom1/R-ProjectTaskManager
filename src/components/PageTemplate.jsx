@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 export default function PageTemplate({
   children, lrClassName,
-  lowerRight, urClassName,
+  lowerRight, lrHeight, urClassName, urHeight,
   upperRight
 }) {
 
@@ -13,8 +13,8 @@ export default function PageTemplate({
     'p-4'
   );
 
-  const urClasses = classNames('w-full h-2/5', urClassName);
-  const lrClasses = classNames('w-full h-3/5', lrClassName);
+  const urClasses = classNames('w-full', urHeight || 'h-2/5', urClassName);
+  const lrClasses = classNames('w-full', lrHeight || 'h-3/5', lrClassName);
 
   return (
     <div className='bg-dark-1a w-full h-[100vh] flex justify-center items-center'>

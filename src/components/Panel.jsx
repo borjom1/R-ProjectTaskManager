@@ -11,7 +11,7 @@ const Panel = ({name}) => {
   const handleExitClick = () => {};
 
   return (
-    <div className='w-full bg-dark-24 rounded-[30px]'>
+    <div className='w-full h-full bg-dark-24 rounded-[30px]'>
       <div className='w-full bg-dark-31 rounded-t-[30px] h-[50px] flex justify-between items-center px-8'>
         <p className='text-gray-7a'>Project</p>
         <p className='text-lg text-white-f0'>{name}</p>
