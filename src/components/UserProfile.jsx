@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import avatar from '../assets/avatar.png';
 import {IoIosRocket} from 'react-icons/io';
 import {MdTimeline} from 'react-icons/md';
 import {IoIosApps} from 'react-icons/io';
@@ -12,6 +11,7 @@ import Role from "./Role";
 import ModalUserInfo from "./ModalUserInfo";
 import {getUser, removeUser} from "../utils/localstorage";
 import {getUserInfo} from "../services/user";
+import User from "./User";
 
 const UserProfile = ({setUserRoles}) => {
 
@@ -62,16 +62,12 @@ const UserProfile = ({setUserRoles}) => {
         onSaveSuccess={onSaveSuccess}
         user={{...user, avatar: userAvatar}}
       />}
-      <div className='w-full bg-dark-31 rounded-t-[30px] py-2 px-10 flex gap-3 items-center'>
-        <img src={userAvatar || avatar} alt='avatar' width={45} className='rounded-full'/>
-        <div>
-          <div className='flex gap-2 items-center'>
-            <p className='text-white-f0 text-lg leading-none'>{user?.fullName}</p>
-            {role}
-          </div>
-          <p className='mt-1 text-gray-7d text-xs font-medium leading-none'>{user?.login}</p>
-        </div>
-      </div>
+      <User
+        role={role}
+        userAvatar={userAvatar}
+        fullName={user?.fullName}
+        login={user?.login}
+      />
       <div className='px-10 mx-auto mt-6'>
         <Label
           name={'Position'}
