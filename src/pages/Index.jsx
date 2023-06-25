@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import PageTemplate from "../components/PageTemplate";
-import ProjectList from "../components/ProjectList";
-import UserProfile from "../components/UserProfile";
-import NewProject from '../components/NewProject';
+import ProjectList from "../components/projects/ProjectList";
+import UserProfile from "../components/user/UserProfile";
+import NewProject from '../components/projects/NewProject';
 import CreateNewFolderRoundedIcon from '@mui/icons-material/CreateNewFolderRounded';
 import UndoIcon from '@mui/icons-material/Undo';
 import {Button} from "@mui/material";

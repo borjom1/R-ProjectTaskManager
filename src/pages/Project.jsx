@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom'
 import PageTemplate from "../components/PageTemplate";
 import Panel from "../components/Panel";
-import Tasks from "../components/Tasks";
-import Stories from "../components/Stories";
+import Tasks from "../components/tasks/Tasks";
+import Stories from "../components/stories/Stories";
 import {getMembers, getProject} from "../services/api/projectsApi";
 import {getUser, saveUser} from "../utils/localstorage";
 import {pullAllStories, pullAvatars} from "../services/projects";

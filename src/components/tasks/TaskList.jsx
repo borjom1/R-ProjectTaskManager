@@ -1,8 +1,8 @@
 import React from 'react';
 import TaskItem from "./TaskItem";
 import {AiFillAlert} from "react-icons/ai";
-import {getUserWith} from "../services/api/userApi";
-import {getUser} from "../utils/localstorage";
+import {getUserWith} from "../../services/api/userApi";
+import {getUser} from "../../utils/localstorage";
 
 const TaskList = ({className, tasks, setTasks, userAvatars, selectedStory}) => {
 

@@ -6,9 +6,9 @@ import {Button, IconButton} from "@mui/material";
 import TaskList from "./TaskList";
 import UndoIcon from "@mui/icons-material/Undo";
 import {useNavigate} from "react-router-dom";
-import {getTasks} from "../services/api/projectsApi";
-import {getUser, saveUser} from "../utils/localstorage";
-import {refresh} from "../services/api/authApi";
+import {getTasks} from "../../services/api/projectsApi";
+import {getUser, saveUser} from "../../utils/localstorage";
+import {refresh} from "../../services/api/authApi";
 import NewTask from "./NewTask";
 
 const Tasks = ({roles, projectId, setStoriesOpened, selectedStory, userAvatars}) => {

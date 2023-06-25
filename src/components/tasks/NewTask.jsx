@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import TextInput from "./TextInput";
+import TextInput from "../TextInput";
 import CreateIcon from "@mui/icons-material/Create";
 import {Button} from "@mui/material";
-import Mark from "./Mark";
+import Mark from "../Mark";
 import {HiOutlineBookmark} from "react-icons/hi";
-import {createTask} from "../services/api/projectsApi";
-import {getUser, saveUser} from "../utils/localstorage";
-import {refresh} from "../services/api/authApi";
+import {createTask} from "../../services/api/projectsApi";
+import {getUser, saveUser} from "../../utils/localstorage";
+import {refresh} from "../../services/api/authApi";
 
 const NewTask = ({storyId, setCreateOpened, setTasks, tasks}) => {
 

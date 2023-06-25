@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import TextInput from "./TextInput";
+import TextInput from "../TextInput";
 import Datepicker from "react-tailwindcss-datepicker";
 import CreateIcon from "@mui/icons-material/Create";
 import {Button} from "@mui/material";
-import {createStory} from "../services/api/projectsApi";
-import {getUser, saveUser} from "../utils/localstorage";
-import {refresh} from "../services/api/authApi";
+import {createStory} from "../../services/api/projectsApi";
+import {getUser, saveUser} from "../../utils/localstorage";
+import {refresh} from "../../services/api/authApi";
 import {AiOutlineTag, AiOutlineCalendar} from 'react-icons/ai';
 
 const NewStory = ({projectId, stories, setStories, setCreateOpened}) => {

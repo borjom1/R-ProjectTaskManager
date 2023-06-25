@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {MdOutlineDoneOutline} from 'react-icons/md';
 import {RiLoader4Fill} from 'react-icons/ri';
 import {TfiHandOpen} from 'react-icons/tfi';
-import Dropdown from "./Dropdown";
+import Dropdown from "../Dropdown";
 
 const TaskStatus = ({status, handleSelect}) => {
 

@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {IconButton} from "@mui/material";
 import UndoIcon from '@mui/icons-material/Undo';
 import SaveIcon from '@mui/icons-material/Save';
-import FileUpload from "./FileUpload";
-import TextInput from "./TextInput";
-import {updateAvatar, updateUser} from "../services/user";
+import FileUpload from "../FileUpload";
+import TextInput from "../TextInput";
+import {updateAvatar, updateUser} from "../../services/user";
 
 const ModalUserInfo = ({setActive, user, onSaveSuccess}) => {
 

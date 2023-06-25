@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import TextInput from "./TextInput";
+import TextInput from "../TextInput";
 import classNames from "classnames";
 import CreateIcon from '@mui/icons-material/Create';
 import {Button} from "@mui/material";
-import {createProject} from "../services/api/projectsApi";
-import {refresh} from "../services/api/authApi";
-import {getUser, saveUser} from "../utils/localstorage";
+import {createProject} from "../../services/api/projectsApi";
+import {refresh} from "../../services/api/authApi";
+import {getUser, saveUser} from "../../utils/localstorage";
 
 const NewProject = ({setCreateOpened, projects, setProjects}) => {
   const [name, setName] = useState('');

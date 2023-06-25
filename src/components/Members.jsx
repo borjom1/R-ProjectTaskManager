@@ -3,7 +3,7 @@ import {BsFillPeopleFill} from 'react-icons/bs';
 import {IconButton} from "@mui/material";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
-import UserList from "./UserList";
+import UserList from "./user/UserList";
 
 const Members = ({roles, members, avatars, setMembers}) => {
 

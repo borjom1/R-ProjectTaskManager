@@ -1,11 +1,11 @@
 import React from 'react';
 import TaskMark from "./TaskMark";
-import avatar from '../assets/avatar.png';
+import avatar from '../../assets/avatar.png';
 import TaskStatus from "./TaskStatus";
 import {AiOutlinePushpin} from 'react-icons/ai';
-import {getUser, saveUser} from "../utils/localstorage";
-import {assignTask, changeTaskStatus} from "../services/api/projectsApi";
-import {refresh} from "../services/api/authApi";
+import {getUser, saveUser} from "../../utils/localstorage";
+import {assignTask, changeTaskStatus} from "../../services/api/projectsApi";
+import {refresh} from "../../services/api/authApi";
 
 const TaskItem = ({
                     id, title, status, loadedAvatar, setAssign, handleChangeStatus,

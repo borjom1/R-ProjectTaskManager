@@ -2,7 +2,7 @@ import React from 'react';
 import {RiGroupFill} from 'react-icons/ri';
 import {IoMdDoneAll} from 'react-icons/io';
 import {RxCross1} from 'react-icons/rx';
-import Indicator from "./Indicator";
+import Indicator from "../Indicator";
 import classNames from "classnames";
 
 const ProjectItem = ({id, title, desc, people, tasksDone, tasksUnDone}) => {

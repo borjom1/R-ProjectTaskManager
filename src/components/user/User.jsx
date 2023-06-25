@@ -1,5 +1,5 @@
 import React from 'react';
-import avatar from "../assets/avatar.png";
+import avatar from "../../assets/avatar.png";
 import classNames from "classnames";
 
 const User = ({className, offBg, role, userAvatar, fullName, login}) => {

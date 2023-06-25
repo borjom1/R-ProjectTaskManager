@@ -2,15 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {IoIosRocket} from 'react-icons/io';
 import {MdTimeline} from 'react-icons/md';
 import {IoIosApps} from 'react-icons/io';
-import Label from "./Label";
+import Label from "../Label";
 import {Button} from "@mui/material";
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import {useNavigate} from "react-router-dom";
 import Role from "./Role";
 import ModalUserInfo from "./ModalUserInfo";
-import {getUser, removeUser} from "../utils/localstorage";
-import {getUserInfo} from "../services/user";
+import {getUser, removeUser} from "../../utils/localstorage";
+import {getUserInfo} from "../../services/user";
 import User from "./User";
 
 const UserProfile = ({setUserRoles}) => {
