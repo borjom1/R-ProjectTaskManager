@@ -13,8 +13,8 @@ const StoryList = ({className, stories, setSelectedStory, setStoriesOpened}) => 
       id={story.id}
       name={story.name}
       tasks={story.tasksCount}
-      from={story.from}
-      to={story.to}
+      from={story.start}
+      to={story.end}
     />
   );
 
