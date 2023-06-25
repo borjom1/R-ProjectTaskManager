@@ -28,7 +28,7 @@ const UserProfile = ({setUserRoles}) => {
     const {login} = getUser();
     getUserInfo().then(data => {
       const {avatar, ...any} = data;
-      setUser({...any, login: '@' + login});
+      setUser({...any, login});
       setUserAvatar(avatar);
       setUserRoles(data.roles);
     });

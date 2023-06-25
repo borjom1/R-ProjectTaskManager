@@ -18,7 +18,7 @@ const User = ({className, offBg, role, userAvatar, fullName, login}) => {
           <p className='text-white-f0 text-lg leading-none'>{fullName}</p>
           {role}
         </div>
-        <p className='mt-1 text-gray-7d text-xs font-medium leading-none'>{login}</p>
+        <p className='mt-1 text-gray-7d text-xs font-medium leading-none'>{'@' + login}</p>
       </div>
     </div>
   );
