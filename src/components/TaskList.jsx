@@ -2,7 +2,7 @@ import React from 'react';
 import TaskItem from "./TaskItem";
 import {AiFillAlert} from "react-icons/ai";
 
-const TaskList = ({className, tasks}) => {
+const TaskList = ({className, tasks, userAvatars}) => {
 
   const list = tasks?.map(task =>
     <TaskItem
@@ -10,6 +10,7 @@ const TaskList = ({className, tasks}) => {
       id={task.id}
       title={task.title}
       status={task.status}
+      loadedAvatar={userAvatars.find(e => e.id === task.assignedUserId)?.avatar}
       assignedUserId={task.assignedUserId}
       assignedFullName={task.assignedFullName}
       marks={task.marks}

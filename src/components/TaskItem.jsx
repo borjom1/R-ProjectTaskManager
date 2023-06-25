@@ -4,7 +4,7 @@ import avatar from '../assets/avatar.png';
 import TaskStatus from "./TaskStatus";
 import { AiOutlinePushpin } from 'react-icons/ai';
 
-const TaskItem = ({id, title, status, assignedUserId, assignedFullName, marks}) => {
+const TaskItem = ({id, title, status, loadedAvatar, assignedUserId, assignedFullName, marks}) => {
 
   const mappedMarks = marks?.map(mark => <TaskMark key={mark} mark={mark}/>);
   const isAssigned = assignedUserId && assignedFullName;
@@ -19,7 +19,7 @@ const TaskItem = ({id, title, status, assignedUserId, assignedFullName, marks}) 
         <div className='bg-dark-22 rounded-lg flex gap-3 items-center py-1 px-3'>
           <AiOutlinePushpin size={22} color={'#4B4B4B'}/>
           <p className='text-sm text-[#4B4B4B]'>{isAssigned ? 'Assigned to' : 'Not assigned'}</p>
-          {isAssigned && <img className='rounded-full' src={avatar} alt={'avatar'} width={23}/>}
+          {isAssigned && <img className='rounded-full' src={loadedAvatar || avatar} alt={'avatar'} width={23}/>}
           {isAssigned && <p className='text-white-b'>{assignedFullName}</p>}
         </div>
         {<TaskStatus status={status}/>}

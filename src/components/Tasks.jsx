@@ -11,7 +11,7 @@ import {getUser, saveUser} from "../utils/localstorage";
 import {refresh} from "../services/api/authApi";
 import NewTask from "./NewTask";
 
-const Tasks = ({projectId, setStoriesOpened, selectedStory}) => {
+const Tasks = ({projectId, setStoriesOpened, selectedStory, userAvatars}) => {
 
   const navigate = useNavigate();
   const [isCreateOpened, setCreateOpened] = useState(false);
@@ -96,6 +96,7 @@ const Tasks = ({projectId, setStoriesOpened, selectedStory}) => {
         <TaskList
           className='h-[83%] px-12 mt-4 flex flex-col gap-4 overflow-y-auto'
           tasks={tasks}
+          userAvatars={userAvatars}
         />
       }
 
