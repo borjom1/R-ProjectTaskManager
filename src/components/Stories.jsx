@@ -5,9 +5,11 @@ import QueueIcon from '@mui/icons-material/Queue';
 import StoryList from "./StoryList";
 import NewStory from "./NewStory";
 
-const Stories = ({projectId, stories, setStories, setStoriesOpened, setSelectedStory}) => {
+const Stories = ({roles, projectId, stories, setStories, setStoriesOpened, setSelectedStory}) => {
 
   const [isCreateOpened, setCreateOpened] = useState(false);
+
+  const isManager = roles?.includes('MANAGER');
 
   return (
     <div className='w-full h-full bg-dark-24 rounded-[30px]'>
@@ -21,17 +23,19 @@ const Stories = ({projectId, stories, setStories, setStoriesOpened, setSelectedS
           </IconButton>
           <p className='text-white-b text-2xl font-medium'>Stories</p>
         </div>
-        <Button
-          variant="outlined"
-          onClick={() => setCreateOpened(!isCreateOpened)}
-          startIcon={isCreateOpened ? <UndoIcon/> : <QueueIcon/>}
-          style={{
-            borderWidth: 3,
-            borderColor: '#0f735f',
-            color: '#19b096',
-          }}>
-          {isCreateOpened ? 'Back' : 'New Story'}
-        </Button>
+        {isManager &&
+          <Button
+            variant="outlined"
+            onClick={() => setCreateOpened(!isCreateOpened)}
+            startIcon={isCreateOpened ? <UndoIcon/> : <QueueIcon/>}
+            style={{
+              borderWidth: 3,
+              borderColor: '#0f735f',
+              color: '#19b096',
+            }}>
+            {isCreateOpened ? 'Back' : 'New Story'}
+          </Button>
+        }
       </div>
 
       {isCreateOpened ?
