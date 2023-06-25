@@ -1,7 +1,7 @@
 import React from 'react';
 import {TextField} from '@mui/material';
 
-const TextInput = ({label, onChange, isPassword, error, bgColor, defaultValue}) => {
+const TextInput = ({className, label, onChange, isPassword, error, bgColor, defaultValue}) => {
 
   const textFieldStyles = {
     backgroundColor: bgColor || '#424242',
@@ -18,7 +18,7 @@ const TextInput = ({label, onChange, isPassword, error, bgColor, defaultValue}) 
 
   return (
     <TextField
-      className='rounded-lg'
+      className={'rounded-lg ' + className}
       label={label}
       variant='filled'
       size='small'
