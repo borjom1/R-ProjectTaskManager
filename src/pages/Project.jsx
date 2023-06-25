@@ -9,6 +9,7 @@ import {getUser, saveUser} from "../utils/localstorage";
 import {pullAllStories, pullAvatars} from "../services/projects";
 import Members from "../components/Members";
 import {refresh} from "../services/api/authApi";
+import {getUserWith} from "../services/api/userApi";
 
 const Project = () => {
   const navigate = useNavigate();
@@ -17,9 +18,13 @@ const Project = () => {
   const [isStoriesOpened, setStoriesOpened] = useState(false);
   const [selectedStory, setSelectedStory] = useState(null);
   const [project, setProject] = useState(null);
+
+  const [roles, setRoles] = useState([]);
   const [stories, setStories] = useState([]);
   const [members, setMembers] = useState([]);
   const [avatars, setAvatars] = useState([]);
+
+  console.log('roles', roles)
 
   useEffect(() => {
     console.log('PROJECT useEffect()')
@@ -67,6 +72,9 @@ const Project = () => {
 
       // load avatar for each member
       pullAvatars(data).then(res => setAvatars(res));
+
+      // load user roles
+      getUserWith(getUser().access).then(({data}) => setRoles(data.roles));
     });
   };
 
@@ -74,9 +82,15 @@ const Project = () => {
     <PageTemplate
       urHeight={'h-[22%]'}
       lrHeight={'h-[78%]'}
-      upperRight={<Panel name={project?.name}/>}
+      upperRight={
+        <Panel
+          name={project?.name}
+          roles={roles}
+        />
+      }
       lowerRight={
         <Members
+          roles={roles}
           members={members}
           avatars={avatars}
           setMembers={setMembers}
@@ -85,6 +99,7 @@ const Project = () => {
     >
       {isStoriesOpened ?
         <Stories
+          roles={roles}
           projectId={id}
           stories={stories}
           setStories={setStories}
@@ -93,6 +108,7 @@ const Project = () => {
         />
         :
         <Tasks
+          roles={roles}
           projectId={id}
           setStoriesOpened={setStoriesOpened}
           selectedStory={selectedStory}
