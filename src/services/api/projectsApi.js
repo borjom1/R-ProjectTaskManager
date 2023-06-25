@@ -82,3 +82,12 @@ export const createTask = async (body, accessToken) => {
     return response;
   }
 };
+
+export const getMembers = async (projectId, accessToken) => {
+  try {
+    const response = await axios.get(`${API_URL}/${projectId}/members`, authHeader(accessToken));
+    return response.data;
+  } catch ({response}) {
+    return response;
+  }
+};
