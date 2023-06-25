@@ -1,9 +1,10 @@
 import React from 'react';
 import StoryItem from "./StoryItem";
+import {AiFillAlert} from "react-icons/ai";
 
 const StoryList = ({className, stories, setSelectedStory, setStoriesOpened}) => {
 
-  const mappedStories = stories?.map(story =>
+  const list = stories?.map(story =>
     <StoryItem
       onClick={() => {
         setSelectedStory(story);
@@ -20,7 +21,12 @@ const StoryList = ({className, stories, setSelectedStory, setStoriesOpened}) => 
 
   return (
     <div className={className}>
-      {mappedStories}
+      {list.length ? list :
+        <div className='flex flex-col items-center mt-20'>
+          <AiFillAlert size={75} color={'#3d3d3d'}/>
+          <p className='text-[#3d3d3d] text-2xl font-bold'>There are no stories yet</p>
+        </div>
+      }
     </div>
   );
 };
