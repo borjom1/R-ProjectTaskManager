@@ -4,7 +4,9 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {Button} from "@mui/material";
 
-const Panel = ({name}) => {
+const Panel = ({name, roles}) => {
+
+  const isManager = roles?.includes('MANAGER');
 
   const handleEditClick = () => {};
   const handleDeleteClick = () => {};
@@ -18,27 +20,27 @@ const Panel = ({name}) => {
       </div>
       <div className='flex gap-5 justify-between px-8 py-4'>
         <Button
-          onClick={handleEditClick}
+          onClick={isManager ? handleEditClick : null}
           className='w-1/3'
           variant="filled"
           startIcon={<EditRoundedIcon/>}
-          style={{backgroundColor: '#447591', color: '#ececec'}}>
+          style={{backgroundColor: isManager ? '#447591' : '#565656', color: '#ececec'}}>
           Edit
         </Button>
         <Button
-          onClick={handleDeleteClick}
+          onClick={isManager ? handleDeleteClick : null}
           className='w-1/3'
           variant="filled"
           startIcon={<DeleteOutlineIcon/>}
-          style={{backgroundColor: '#D23A3A', color: '#ececec'}}>
+          style={{backgroundColor: isManager ? '#D23A3A' : '#565656', color: '#ececec'}}>
           Delete
         </Button>
         <Button
-          onClick={handleExitClick}
+          onClick={isManager ? handleExitClick : null}
           className='w-1/3'
           variant="filled"
           startIcon={<LogoutIcon/>}
-          style={{backgroundColor: '#808080', color: '#ececec'}}>
+          style={{backgroundColor: isManager ? '#808080' : '#565656', color: '#ececec'}}>
           Exit
         </Button>
       </div>
