@@ -17,6 +17,6 @@ export const pullAllStories = async (projectId) => {
       throw 'forbidden';
     }
   } else {
-    return getStories(projectId, user.access);
+    return response;
   }
 };
