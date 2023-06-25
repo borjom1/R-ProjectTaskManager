@@ -9,10 +9,12 @@ import {useNavigate} from "react-router-dom";
 import {getTasks} from "../services/api/projectsApi";
 import {getUser, saveUser} from "../utils/localstorage";
 import {refresh} from "../services/api/authApi";
+import NewTask from "./NewTask";
 
 const Tasks = ({projectId, setStoriesOpened, selectedStory}) => {
 
   const navigate = useNavigate();
+  const [isCreateOpened, setCreateOpened] = useState(false);
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -22,6 +24,7 @@ const Tasks = ({projectId, setStoriesOpened, selectedStory}) => {
     if (!selectedStory) {
       return;
     }
+    console.log('TASKS pull tasks')
     getTasks(projectId, selectedStory.id, user.access).then(res => {
       if (res.status && res.status === 401) {
         refresh(user.refresh).then(data => {
@@ -30,12 +33,13 @@ const Tasks = ({projectId, setStoriesOpened, selectedStory}) => {
             .then(data => setTasks(data));
         });
       } else {
-        getTasks(projectId, selectedStory.id, user.access)
-          .then(data => setTasks(data));
+        setTasks(res);
       }
     });
 
   }, [selectedStory]);
+
+  const handleUndoClick = () => isCreateOpened ? setCreateOpened(false) : navigate('/');
 
   return (
     <div className='w-full h-full bg-dark-24 rounded-[30px]'>
@@ -44,7 +48,7 @@ const Tasks = ({projectId, setStoriesOpened, selectedStory}) => {
 
         <div className='flex gap-3 items-center'>
           <IconButton
-            onClick={() => navigate('/')}
+            onClick={handleUndoClick}
             aria-label="undo"
             style={{color: '#ececec'}}>
             <UndoIcon/>
@@ -55,33 +59,45 @@ const Tasks = ({projectId, setStoriesOpened, selectedStory}) => {
           </div>
           <p className='text-white-b text-2xl font-medium'>Tasks</p>
         </div>
-
-        <div className='flex gap-2'>
-          <Button
-            variant="outlined"
-            startIcon={<AddCircleOutlineIcon/>}
-            style={{
-              borderWidth: 3,
-              borderColor: '#0f735f',
-              color: '#19b096',
-            }}>
-            New task
-          </Button>
-          <Button
-            onClick={() => setStoriesOpened(true)}
-            variant="filled"
-            startIcon={<AutoAwesomeMotionIcon/>}
-            style={{backgroundColor: '#5d5d5d', color: '#ececec'}}>
-            Stories
-          </Button>
-        </div>
+        {!isCreateOpened &&
+          <div className='flex gap-2'>
+            {selectedStory?.id &&
+              <Button
+                onClick={() => setCreateOpened(true)}
+                variant="outlined"
+                startIcon={<AddCircleOutlineIcon/>}
+                style={{
+                  borderWidth: 3,
+                  borderColor: '#0f735f',
+                  color: '#19b096',
+                }}>
+                New task
+              </Button>
+            }
+            <Button
+              onClick={() => setStoriesOpened(true)}
+              variant="filled"
+              startIcon={<AutoAwesomeMotionIcon/>}
+              style={{backgroundColor: '#5d5d5d', color: '#ececec'}}>
+              Stories
+            </Button>
+          </div>
+        }
 
       </div>
 
-      <TaskList
-        className='h-[83%] px-12 mt-4 flex flex-col gap-4 overflow-y-auto'
-        tasks={tasks}
-      />
+      {isCreateOpened ?
+        <NewTask
+          storyId={selectedStory.id}
+          setCreateOpened={setCreateOpened}
+          setTasks={setTasks}
+          tasks={tasks}
+        /> :
+        <TaskList
+          className='h-[83%] px-12 mt-4 flex flex-col gap-4 overflow-y-auto'
+          tasks={tasks}
+        />
+      }
 
     </div>
   );
