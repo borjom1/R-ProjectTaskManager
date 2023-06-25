@@ -4,9 +4,11 @@ import PageTemplate from "../components/PageTemplate";
 import Panel from "../components/Panel";
 import Tasks from "../components/Tasks";
 import Stories from "../components/Stories";
-import {getProject} from "../services/api/projectsApi";
-import {getUser} from "../utils/localstorage";
-import {pullAllStories} from "../services/projects";
+import {getMembers, getProject} from "../services/api/projectsApi";
+import {getUser, saveUser} from "../utils/localstorage";
+import {pullAllStories, pullAvatars} from "../services/projects";
+import Members from "../components/Members";
+import {refresh} from "../services/api/authApi";
 
 const Project = () => {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ const Project = () => {
   const [project, setProject] = useState(null);
   const [stories, setStories] = useState([]);
   const [members, setMembers] = useState([]);
+  const [avatars, setAvatars] = useState([]);
 
   useEffect(() => {
     console.log('PROJECT useEffect()')
@@ -28,19 +31,58 @@ const Project = () => {
     if (!selectedStory) {
       // try to pull story
       pullAllStories(id)
-        .then(stories => {
-          setStories(stories);
-          setSelectedStory(stories[0]);
+        .then(res => {
+          if (res.status) {
+            if (res.status === 401) {
+              refresh(getUser().refresh).then(data => {
+                saveUser(data);
 
-          getProject(id, getUser().access).then(data => setProject(data));
-        })
-        .catch(() => navigate('/'));
+                pullAllStories(id).then(stories => {
+                  onResult(stories);
+                });
+
+              });
+            } else if (res.status === 403) {
+              navigate('/')
+            }
+          } else {
+            onResult(res);
+          }
+        });
     }
 
   }, []);
 
+  const onResult = stories => {
+    // pull stories
+    setStories(stories);
+    setSelectedStory(stories[0]);
+
+    // pull project
+    getProject(id, getUser().access).then(data => setProject(data));
+
+    // pull members
+    getMembers(id, getUser().access).then(data => {
+      setMembers(data);
+
+      // load avatar for each member
+      pullAvatars(data).then(res => setAvatars(res));
+    });
+  };
+
   return (
-    <PageTemplate upperRight={<Panel name={project?.name}/>}>
+    <PageTemplate
+      urHeight={'h-[22%]'}
+      lrHeight={'h-[78%]'}
+      upperRight={<Panel name={project?.name}/>}
+      lowerRight={
+        <Members
+          members={members}
+          avatars={avatars}
+          setMembers={setMembers}
+        />
+      }
+    >
       {isStoriesOpened ?
         <Stories
           projectId={id}
@@ -54,6 +96,7 @@ const Project = () => {
           projectId={id}
           setStoriesOpened={setStoriesOpened}
           selectedStory={selectedStory}
+          userAvatars={avatars}
         />
       }
     </PageTemplate>
