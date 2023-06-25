@@ -91,3 +91,29 @@ export const getMembers = async (projectId, accessToken) => {
     return response;
   }
 };
+
+export const assignTask = async (storyId, taskId, accessToken) => {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/story/${storyId}/tasks/${taskId}/assign`,
+      null,
+      authHeader(accessToken)
+    );
+    return response.data;
+  } catch ({response}) {
+    return response;
+  }
+};
+
+export const changeTaskStatus = async (storyId, taskId, status, accessToken) => {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/story/${storyId}/tasks/${taskId}?status=${status}`,
+      null,
+      authHeader(accessToken)
+    );
+    return response.data;
+  } catch ({response}) {
+    return response;
+  }
+};
