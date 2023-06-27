@@ -24,9 +24,7 @@ const TaskItem = ({
           });
         });
       } else {
-        assignTask(selectedStory.id, id, access).then(() => {
-          setAssign(id, userId);
-        });
+        setAssign(id, userId);
       }
     });
 
@@ -44,9 +42,7 @@ const TaskItem = ({
           });
         });
       } else {
-        changeTaskStatus(selectedStory.id, id, status.key, access).then(() => {
-          handleChangeStatus(id, status.key);
-        });
+        handleChangeStatus(id, status.key);
       }
     });
 
